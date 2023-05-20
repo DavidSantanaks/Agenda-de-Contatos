@@ -20,7 +20,6 @@ public class ContatoDAO {
 
     public Contatos atualizarContato(int id,String nome){
         Contatos a = em.find(Contatos.class, id);
-        a.setNome(nome);
         return a;
     }
 

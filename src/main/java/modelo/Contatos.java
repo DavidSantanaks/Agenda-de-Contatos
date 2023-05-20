@@ -61,6 +61,7 @@ public class Contatos {
     @Override
     public String toString() {
         return "Contato" + '\n'+
+                "ID: " + id + '\n' +
                 "Nome: " + nome + '\n'+
                 "Telefone: " + telefone + '\n'+
                 "Email: " + email + '\n';
