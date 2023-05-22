@@ -66,23 +66,35 @@ public class AgendaContatosApp {
         EntityManager em = JPAUtil.getEntityManager();
         ContatoDAO dao = new ContatoDAO(em);
         Scanner ler = new Scanner(System.in);
-        dao.todosContatos();
+        System.out.println("""
+               1- Ver todos os contatos 
+               2- Unico contato
+                """);
+        var resp = ler.nextInt();
+        if(resp == 1){
+            dao.todosContatos();
+        } else if (resp == 2) {
+            System.out.print("Informe o ID do contato: ");
+            var o = ler.nextInt();
+            System.out.println(dao.buscarPorId(o));
+        }
+
     }
 
     public static void atualizarContato(){
         EntityManager em = JPAUtil.getEntityManager();
         ContatoDAO dao = new ContatoDAO(em);
         Scanner ler = new Scanner(System.in);
-        System.out.print("Informe o ID do contato");
+        System.out.print("Informe o ID do contato: ");
         var id = ler.nextInt();
-        //dao.atualizarContato(id "arrumar");
+        dao.attContato(id);
     }
 
     public static void deletarContatos(){
         EntityManager em = JPAUtil.getEntityManager();
         ContatoDAO dao = new ContatoDAO(em);
         Scanner ler = new Scanner(System.in);
-        System.out.print("Informe o ID do contato para deletar");
+        System.out.print("Informe o ID do contato para deletar: ");
         var deletar = ler.nextInt();
         em.getTransaction().begin();
         dao.deletarContato(deletar);
