@@ -21,7 +21,10 @@ public class ContatoDAO {
 
     //Metodos
     public void cadastrarContato(Contatos contatos){
+        this.em.getTransaction().begin();
         this.em.persist(contatos);
+        this.em.getTransaction().commit();
+        this.em.close();
         System.out.println("Contato salvo com sucesso \n");
     }
 
@@ -98,7 +101,10 @@ public class ContatoDAO {
             DeletarException deletarException = new DeletarException("Contato não existe");
             System.out.println(deletarException.getMessage() + '\n');
         }else{
+            this.em.getTransaction().begin();
             this.em.remove(a);
+            this.em.getTransaction().commit();
+            this.em.close();
         }
 
     }

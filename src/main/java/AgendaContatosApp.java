@@ -3,7 +3,6 @@ import jakarta.persistence.EntityManager;
 import modelo.Contatos;
 import util.JPAUtil;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class AgendaContatosApp {
@@ -56,10 +55,8 @@ public class AgendaContatosApp {
         System.out.print("E-mail: ");
         String email = ler.nextLine();
         Contatos contato = new Contatos(nome,tel,email);
-        em.getTransaction().begin();
         dao.cadastrarContato(contato);
-        em.getTransaction().commit();
-        em.close();
+
     }
 
     public static void verContatos(){
@@ -96,10 +93,8 @@ public class AgendaContatosApp {
         Scanner ler = new Scanner(System.in);
         System.out.print("Informe o ID do contato para deletar: ");
         var deletar = ler.nextInt();
-        em.getTransaction().begin();
         dao.deletarContato(deletar);
-        em.getTransaction().commit();
-        em.close();
+
     }
 
 
