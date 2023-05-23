@@ -4,6 +4,7 @@ import exceptions.CttNaoEncontradoException;
 import exceptions.DeletarException;
 import jakarta.persistence.EntityManager;
 import modelo.Contatos;
+import util.JPAUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +16,12 @@ public class ContatoDAO {
     private EntityManager em;
 
     //Construtor
-    public ContatoDAO(EntityManager em){
-        this.em = em;
+    public ContatoDAO(){
     }
 
     //Metodos
     public void cadastrarContato(Contatos contatos){
+        this.em = JPAUtil.getEntityManager();
         this.em.getTransaction().begin();
         this.em.persist(contatos);
         this.em.getTransaction().commit();
@@ -29,6 +30,7 @@ public class ContatoDAO {
     }
 
     public void attContato(int id){
+        this.em = JPAUtil.getEntityManager();
         Scanner ler = new Scanner(System.in);
         Contatos contatoAtualizado =  this.em.find(Contatos.class, id);
 
@@ -72,6 +74,7 @@ public class ContatoDAO {
     }
 
     public String buscarPorId(int id){
+        this.em = JPAUtil.getEntityManager();
         Contatos a =this.em.find(Contatos.class, id);
         if(a == null){
             //Exception
@@ -84,6 +87,7 @@ public class ContatoDAO {
     }
 
     public List<Contatos> todosContatos(){
+        this.em = JPAUtil.getEntityManager();
         String jpql = "SELECT p FROM Contatos as p";
         List<Contatos> a = em.createQuery(jpql, Contatos.class).getResultList();
 
@@ -96,6 +100,7 @@ public class ContatoDAO {
     }
 
     public void deletarContato(int id){
+        this.em = JPAUtil.getEntityManager();
         Contatos a = this.em.find(Contatos.class, id);
         if (a == null){
             DeletarException deletarException = new DeletarException("Contato não existe");
