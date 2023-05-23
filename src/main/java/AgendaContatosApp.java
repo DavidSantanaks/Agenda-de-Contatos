@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class AgendaContatosApp {
     public static void main(String[] args) {
         Scanner ler = new Scanner(System.in);
+
+
         var resp = 0;
         while(resp != 5) {
             switch (resp){
